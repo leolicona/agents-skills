@@ -12,10 +12,17 @@ const MAX_LINES = 500;
 const errors = [];
 const warnings = [];
 
-const skills = await readSkillsFrom(catalogDir);
-const dirs = (await fs.readdir(catalogDir, { withFileTypes: true }))
+const dir = catalogDir();
+const skills = await readSkillsFrom(dir);
+const entries = await fs.readdir(dir, { withFileTypes: true }).catch(() => []);
+const dirs = entries
   .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.'))
   .map((entry) => entry.name);
+
+if (!skills.length) {
+  console.error(`error  el catalogo ${path.relative(process.cwd(), dir) || dir} no tiene ninguna skill`);
+  process.exit(1);
+}
 
 for (const dir of dirs) {
   if (!skills.some((skill) => skill.id === dir)) {

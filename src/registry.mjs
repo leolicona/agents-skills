@@ -59,7 +59,7 @@ export async function readSkillsFrom(dir) {
 
 /** Catalogo que trae el paquete. */
 export function listCatalog() {
-  return readSkillsFrom(catalogDir);
+  return readSkillsFrom(catalogDir());
 }
 
 /** Busca una skill del catalogo por id o por `name` del frontmatter. */
