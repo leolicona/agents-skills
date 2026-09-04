@@ -81,18 +81,16 @@ open question, not a fact.
 
 ## Spikes
 
-A spike is a time-boxed experiment that answers **one** falsifiable question
-whose answer changes a decision. Not a prototype, not a tutorial.
+When documentation cannot settle whether an option holds up, name the unknown
+and hand it to the `spike` skill, which turns it into a falsifiable question,
+runs it and reports back into the *Spikes* table here.
 
-- **Default 2-4 hours, never more than a day.** It comes out of the appetite.
-- **One question, with a pass criterion you could show someone**: "a Worker
-  verifies the signature and answers the webhook inside the provider's
-  timeout, at 20 messages/second" — not "explore Workers".
-- **Name the decision it unblocks** and **the fallback if it fails**. A spike
-  with no fallback is a bet, not an experiment.
-- **Three at most.** More than that means the capability list is still vague.
-- Write down the result — pass or fail — in the *Spikes* table. A failed
-  spike that is recorded saves the next month.
+- Name **three at most**. More than that means the capability list is still
+  vague — go back to step 2.
+- For each, state the decision it blocks and the fallback if the answer is
+  no. A spike with no fallback is a bet, not an experiment.
+- Do not research the unknown here: an option no spike has tested is a
+  candidate, not a decision.
 
 ## Example
 
