@@ -47,7 +47,7 @@ export async function run(argv) {
   try {
     parsed = parseArgs({ args: argv, options: OPTIONS, allowPositionals: true });
   } catch (error) {
-    throw new CliError(error.message, { hint: 'Ejecuta `agent-skills --help`.' });
+    throw new CliError(error.message, { hint: 'Run `agent-skills --help`.' });
   }
 
   const { values, positionals } = parsed;
@@ -66,8 +66,8 @@ export async function run(argv) {
 
   const handler = COMMANDS[command];
   if (!handler) {
-    throw new CliError(`Comando desconocido: "${command}".`, {
-      hint: `Disponibles: ${[...new Set(Object.keys(COMMANDS))].join(', ')}`,
+    throw new CliError(`Unknown command: "${command}".`, {
+      hint: `Available: ${[...new Set(Object.keys(COMMANDS))].join(', ')}`,
     });
   }
 
@@ -79,33 +79,33 @@ function printHelp() {
   console.log(`${b(pkg.name)} v${pkg.version}
 ${pkg.description}
 
-${b('Uso')}
-  npx ${pkg.name} <comando> [opciones]
+${b('Usage')}
+  npx ${pkg.name} <command> [options]
 
-${b('Comandos')}
-  list [texto]        Lista el catalogo de skills (filtra por texto)
-  info <skill>        Muestra la descripcion y el contenido de una skill
-  add <skill...>      Instala skills en el proyecto (--all para todas)
-  remove <skill...>   Elimina skills instaladas
-  installed           Muestra que hay instalado en este proyecto
-  sync                Regenera el bloque de skills en AGENTS.md
-  new <nombre>        Crea el esqueleto de una skill nueva
+${b('Commands')}
+  list [text]         List the catalog (filtered by free text)
+  info <skill>        Show a skill's description and contents
+  add <skill...>      Install skills into the project (--all for every one)
+  remove <skill...>   Remove installed skills
+  installed           Show what is installed in this project
+  sync                Regenerate the skills block in AGENTS.md
+  new <name>          Scaffold a new skill
 
-${b('Opciones')}
-  -t, --target <ids>  Destinos: ${TARGET_IDS.join(', ')}, all
-                      (por defecto se autodetectan)
-  -d, --dir <ruta>    Directorio del proyecto (por defecto: el actual)
-  -a, --all           Aplica a todas las skills del catalogo
-  -f, --force         Sobrescribe skills ya instaladas
-      --dry-run       Simula sin escribir en disco
-      --json          Salida en JSON (list, info, installed)
-  -l, --long          Mas detalle en list
-  -h, --help          Esta ayuda
-  -v, --version       Version del paquete
+${b('Options')}
+  -t, --target <ids>  Targets: ${TARGET_IDS.join(', ')}, all
+                      (auto-detected by default)
+  -d, --dir <path>    Project directory (default: the current one)
+  -a, --all           Apply to every skill in the catalog
+  -f, --force         Overwrite skills that are already installed
+      --dry-run       Simulate without writing to disk
+      --json          JSON output (list, info, installed)
+  -l, --long          More detail in list
+  -h, --help          This help
+  -v, --version       Package version
 
-${b('Ejemplos')}
+${b('Examples')}
   npx ${pkg.name} list
-  npx ${pkg.name} add conventional-commits code-review
+  npx ${pkg.name} add project-brief
   npx ${pkg.name} add --all --target claude,agents-md
-  npx ${pkg.name} remove code-review --dry-run`);
+  npx ${pkg.name} remove project-brief --dry-run`);
 }

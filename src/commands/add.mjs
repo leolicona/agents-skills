@@ -13,7 +13,7 @@ export async function add({ positionals, values }) {
     : await Promise.all(positionals.map((id) => findSkill(id)));
 
   if (!skills.length) {
-    throw new CliError('Indica al menos una skill.', {
+    throw new CliError('Name at least one skill.', {
       hint: 'agent-skills add <skill> [...]  |  agent-skills add --all',
     });
   }
@@ -23,7 +23,7 @@ export async function add({ positionals, values }) {
   const wantsAgentsMd = targets.some((target) => target.id === 'agents-md');
 
   console.log(
-    `${color.bold('Destinos:')} ${targets.map((target) => target.label).join(', ')}  ${color.dim(cwd)}`,
+    `${color.bold('Targets:')} ${targets.map((target) => target.label).join(', ')}  ${color.dim(cwd)}`,
   );
   console.log('');
 
@@ -33,33 +33,33 @@ export async function add({ positionals, values }) {
       const result = await installSkill(skill, target, cwd, { force: values.force, dryRun });
       const where = `${target.dir}/${skill.id}/`;
       if (result === 'skipped') {
-        skip(`${skill.id} ya existe en ${target.label} (usa --force para sobrescribir)`);
+        skip(`${skill.id} already in ${target.label} (use --force to overwrite)`);
       } else {
         changes++;
-        ok(`${skill.id} ${result === 'updated' ? 'actualizada' : 'instalada'} en ${where}`);
+        ok(`${skill.id} ${result === 'updated' ? 'updated' : 'installed'} in ${where}`);
       }
     }
   }
 
   if (!fileTargets.length) {
-    warn('Ningun destino copia archivos; solo se actualizara AGENTS.md.');
+    warn('No target copies files; only AGENTS.md will be updated.');
   }
 
   if (wantsAgentsMd || (await hasAgentsMd(cwd))) {
     const result = await syncAgentsMd(cwd, { dryRun });
     if (result.changed) {
       changes++;
-      ok(`AGENTS.md actualizado (${result.count} skills)`);
+      ok(`AGENTS.md updated (${result.count} skill${result.count === 1 ? '' : 's'})`);
     } else {
-      skip('AGENTS.md ya estaba al dia');
+      skip('AGENTS.md already up to date');
     }
   }
 
   console.log('');
   if (dryRun) {
-    console.log(color.yellow('Simulacion (--dry-run): no se escribio nada.'));
+    console.log(color.yellow('Dry run: nothing was written.'));
   } else if (!changes) {
-    console.log(color.dim('Sin cambios.'));
+    console.log(color.dim('No changes.'));
   }
   return 0;
 }

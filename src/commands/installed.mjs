@@ -31,7 +31,7 @@ export async function installed({ values }) {
   for (const { target, skills } of report) {
     console.log(color.bold(`${target.label}  ${color.dim(target.dir)}`));
     if (!skills.length) {
-      console.log(`  ${color.dim('(vacio)')}`);
+      console.log(`  ${color.dim('(empty)')}`);
     }
     for (const skill of skills) {
       total++;
@@ -40,6 +40,6 @@ export async function installed({ values }) {
     console.log('');
   }
 
-  if (!total) console.log(color.dim('Aun no hay skills instaladas. Prueba `agent-skills add --all`.'));
+  if (!total) console.log(color.dim('No skills installed yet. Try `agent-skills add --all`.'));
   return 0;
 }

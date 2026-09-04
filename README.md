@@ -52,8 +52,8 @@ them. Anything you write outside the markers is left untouched:
 
 ```markdown
 <!-- agent-skills:start -->
-## Skills disponibles
-| Skill | Cuando usarla | Archivo |
+## Available skills
+| Skill | When to use it | File |
 | --- | --- | --- |
 | `project-brief` | Interviews the user... | `.claude/skills/project-brief/SKILL.md` |
 <!-- agent-skills:end -->

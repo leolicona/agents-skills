@@ -23,12 +23,12 @@ export async function list({ positionals, values }) {
   }
 
   if (!skills.length) {
-    console.log(query ? `Sin resultados para "${query}".` : 'El catalogo esta vacio.');
+    console.log(query ? `No matches for "${query}".` : 'The catalog is empty.');
     return query ? 1 : 0;
   }
 
   const width = Math.max(...skills.map((skill) => skill.id.length));
-  console.log(color.bold(`Skills disponibles (${skills.length})`));
+  console.log(color.bold(`Available skills (${skills.length})`));
   console.log('');
 
   for (const skill of skills) {
@@ -40,6 +40,6 @@ export async function list({ positionals, values }) {
   }
 
   console.log('');
-  console.log(color.dim('Instalar:  npx @leolicona/agent-skills add <skill>'));
+  console.log(color.dim('Install:  npx @leolicona/agent-skills add <skill>'));
   return 0;
 }

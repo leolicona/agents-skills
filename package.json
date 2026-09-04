@@ -1,7 +1,7 @@
 {
   "name": "@leolicona/agent-skills",
   "version": "0.1.0",
-  "description": "Catálogo de skills (SKILL.md) para agentes de IA, instalables con npx en Claude Code, OpenCode y AGENTS.md",
+  "description": "Catalog of SKILL.md skills for AI agents, installable with npx into Claude Code, OpenCode and AGENTS.md",
   "type": "module",
   "bin": {
     "agent-skills": "bin/cli.mjs"

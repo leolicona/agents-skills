@@ -43,8 +43,8 @@ export function resolveTargets(value) {
   return requested.map((id) => {
     const target = TARGETS[id];
     if (!target) {
-      throw new CliError(`Destino desconocido: "${id}".`, {
-        hint: `Validos: ${TARGET_IDS.join(', ')}, all`,
+      throw new CliError(`Unknown target: "${id}".`, {
+        hint: `Valid targets: ${TARGET_IDS.join(', ')}, all`,
       });
     }
     return target;

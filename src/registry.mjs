@@ -73,10 +73,10 @@ export async function findSkill(id) {
     .filter((candidate) => candidate.includes(id) || id.includes(candidate))
     .slice(0, 3);
 
-  throw new CliError(`No existe la skill "${id}" en el catalogo.`, {
+  throw new CliError(`Skill "${id}" is not in the catalog.`, {
     hint: suggestions.length
-      ? `Quiza buscabas: ${suggestions.join(', ')}`
-      : 'Ejecuta `agent-skills list` para ver las disponibles.',
+      ? `Did you mean: ${suggestions.join(', ')}`
+      : 'Run `agent-skills list` to see what is available.',
   });
 }
 

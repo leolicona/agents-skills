@@ -7,11 +7,11 @@ export const START = '<!-- agent-skills:start -->';
 export const END = '<!-- agent-skills:end -->';
 
 const HEADER = [
-  '## Skills disponibles',
+  '## Available skills',
   '',
-  'Estas skills estan instaladas en este repositorio. Antes de una tarea que',
-  'coincida con la descripcion de alguna, lee su `SKILL.md` completo y sigue',
-  'sus instrucciones.',
+  'These skills are installed in this repository. Before starting a task that',
+  'matches one of the descriptions below, read that skill\'s full `SKILL.md`',
+  'and follow its instructions.',
   '',
 ];
 
@@ -49,9 +49,9 @@ export function renderBlock(skills) {
   const lines = [START, ...HEADER];
 
   if (!skills.length) {
-    lines.push('_No hay skills instaladas todavia._');
+    lines.push('_No skills installed yet._');
   } else {
-    lines.push('| Skill | Cuando usarla | Archivo |', '| --- | --- | --- |');
+    lines.push('| Skill | When to use it | File |', '| --- | --- | --- |');
     for (const skill of skills) {
       lines.push(
         `| \`${skill.id}\` | ${escapeCell(truncate(skill.description, 160))} | \`${skill.paths[0]}\` |`,

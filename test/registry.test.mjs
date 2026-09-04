@@ -19,7 +19,7 @@ test('el catalogo trae skills con name y description coherentes', async () => {
 test('findSkill localiza por id y falla con sugerencia', async () => {
   const skill = await findSkill('demo-basica');
   assert.equal(skill.id, 'demo-basica');
-  await assert.rejects(() => findSkill('no-existe-xyz'), /No existe la skill/);
+  await assert.rejects(() => findSkill('no-existe-xyz'), /is not in the catalog/);
 });
 
 test('searchCatalog filtra por texto libre', async () => {

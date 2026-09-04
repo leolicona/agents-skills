@@ -6,60 +6,60 @@ import { CliError, color, ok } from '../ui.mjs';
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
-const TEMPLATE = `## Cuando usar esta skill
+const TEMPLATE = `## When to use this skill
 
-Describe las senales concretas que deben disparar esta skill.
+Describe the concrete signals that should trigger this skill.
 
-## Como trabajar
+## How to work
 
-1. Primer paso concreto.
-2. Segundo paso concreto.
-3. Que entregar al final.
+1. First concrete step.
+2. Second concrete step.
+3. What to deliver at the end.
 
-## Reglas
+## Rules
 
-- Una regla por linea, en imperativo.
-- Evita instrucciones genericas que el agente ya cumple por defecto.
+- One rule per line, in the imperative.
+- Skip generic advice the agent already follows by default.
 
-## Ejemplo
+## Example
 
-Entrada:
+Input:
 
 \`\`\`text
-(pega aqui un caso real)
+(paste a real case here)
 \`\`\`
 
-Salida esperada:
+Expected output:
 
 \`\`\`text
-(pega aqui la respuesta correcta)
+(paste the correct answer here)
 \`\`\`
 `;
 
 export async function createSkill({ positionals, values }) {
   const id = positionals[0];
-  if (!id) throw new CliError('Falta el nombre.', { hint: 'agent-skills new <mi-skill>' });
+  if (!id) throw new CliError('Missing name.', { hint: 'agent-skills new <my-skill>' });
   if (!SLUG.test(id)) {
-    throw new CliError(`"${id}" no es un nombre valido.`, {
-      hint: 'Usa kebab-case en minusculas, por ejemplo: revisar-pull-request',
+    throw new CliError(`"${id}" is not a valid name.`, {
+      hint: 'Use lowercase kebab-case, for example: review-pull-request',
     });
   }
 
   const base = path.resolve(values.dir ?? process.cwd(), values.into ?? 'skills');
   const dir = path.join(base, id);
-  if (await exists(dir)) throw new CliError(`Ya existe ${path.relative(process.cwd(), dir)}.`);
+  if (await exists(dir)) throw new CliError(`${path.relative(process.cwd(), dir)} already exists.`);
 
   const frontmatter = stringifyFrontmatter({
     name: id,
     description:
       values.description ??
-      'Describe en una frase que hace la skill y cuando debe activarla el agente.',
+      'In one sentence: what the skill does and when the agent should use it.',
   });
 
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.join(dir, 'SKILL.md'), `${frontmatter}\n\n# ${id}\n\n${TEMPLATE}`, 'utf8');
 
-  ok(`Skill creada en ${path.relative(process.cwd(), dir)}/SKILL.md`);
-  console.log(color.dim('Edita la descripcion: es lo unico que el agente lee para decidir usarla.'));
+  ok(`Skill created at ${path.relative(process.cwd(), dir)}/SKILL.md`);
+  console.log(color.dim('Edit the description: it is all the agent reads when deciding to use it.'));
   return 0;
 }

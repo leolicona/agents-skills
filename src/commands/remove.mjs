@@ -5,7 +5,7 @@ import { CliError, color, ok, skip } from '../ui.mjs';
 
 export async function remove({ positionals, values }) {
   if (!positionals.length) {
-    throw new CliError('Indica al menos una skill.', { hint: 'agent-skills remove <skill> [...]' });
+    throw new CliError('Name at least one skill.', { hint: 'agent-skills remove <skill> [...]' });
   }
 
   const cwd = path.resolve(values.dir ?? process.cwd());
@@ -19,18 +19,18 @@ export async function remove({ positionals, values }) {
     for (const target of targets) {
       if (await removeSkill(id, target, cwd, { dryRun })) {
         removed++;
-        ok(`${id} eliminada de ${target.dir}/`);
+        ok(`${id} removed from ${target.dir}/`);
       } else {
-        skip(`${id} no estaba en ${target.label}`);
+        skip(`${id} was not in ${target.label}`);
       }
     }
   }
 
   if (await exists(path.join(cwd, 'AGENTS.md'))) {
     const result = await syncAgentsMd(cwd, { dryRun });
-    if (result.changed) ok(`AGENTS.md actualizado (${result.count} skills)`);
+    if (result.changed) ok(`AGENTS.md updated (${result.count} skill${result.count === 1 ? '' : 's'})`);
   }
 
-  if (!removed) console.log(color.dim('Sin cambios.'));
+  if (!removed) console.log(color.dim('No changes.'));
   return 0;
 }

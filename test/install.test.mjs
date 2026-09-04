@@ -93,13 +93,13 @@ test('new crea el esqueleto de una skill', async () => {
 
   const created = await read(path.join(dir, 'skills/mi-skill-nueva/SKILL.md'));
   assert.match(created, /name: mi-skill-nueva/);
-  await assert.rejects(() => run(['new', 'Mi Skill', '--dir', dir]), /no es un nombre valido/);
+  await assert.rejects(() => run(['new', 'Mi Skill', '--dir', dir]), /is not a valid name/);
 });
 
 test('comandos y destinos invalidos fallan con CliError', async () => {
   const dir = await tempProject();
-  await assert.rejects(() => run(['inventado']), /Comando desconocido/);
-  await assert.rejects(() => run(['add', 'demo-basica', '-t', 'vim', '--dir', dir]), /Destino desconocido/);
+  await assert.rejects(() => run(['inventado']), /Unknown command/);
+  await assert.rejects(() => run(['add', 'demo-basica', '-t', 'vim', '--dir', dir]), /Unknown target/);
 });
 
 test('add copia la carpeta completa, no solo SKILL.md', async () => {

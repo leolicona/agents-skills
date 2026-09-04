@@ -3,7 +3,7 @@ import { CliError, color } from '../ui.mjs';
 
 export async function info({ positionals, values }) {
   const id = positionals[0];
-  if (!id) throw new CliError('Falta el nombre de la skill.', { hint: 'agent-skills info <skill>' });
+  if (!id) throw new CliError('Missing skill name.', { hint: 'agent-skills info <skill>' });
 
   const skill = await findSkill(id);
 
@@ -33,7 +33,7 @@ export async function info({ positionals, values }) {
   if (skill.allowedTools.length) {
     console.log(`${color.dim('allowed-tools')} ${skill.allowedTools.join(', ')}`);
   }
-  console.log(`${color.dim('archivo')}       ${skill.file}`);
+  console.log(`${color.dim('file')}          ${skill.file}`);
   console.log('');
   console.log(color.dim('--- SKILL.md ---'));
   console.log(skill.body.trim());
