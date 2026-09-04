@@ -82,8 +82,8 @@ open question, not a fact.
 ## Spikes
 
 When documentation cannot settle whether an option holds up, name the unknown
-and hand it to the `spike` skill, which turns it into a falsifiable question,
-runs it and reports back into the *Spikes* table here.
+and hand it to the `tech-feasibility` skill, which turns it into a falsifiable
+question, runs it and reports back into the *Spikes* table here.
 
 - Name **three at most**. More than that means the capability list is still
   vague — go back to step 2.

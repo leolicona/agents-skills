@@ -1,4 +1,4 @@
-# Spike template
+# Spike record template
 
 One file per spike, at `spikes/<NNN>-<slug>.md`. Numbers are sequential and
 never reused, so a dead end stays findable.

@@ -65,7 +65,7 @@ them. Anything you write outside the markers is left untouched:
 | --- | --- |
 | `project-brief` | Interviews the user in rounds and writes a `projectbrief.md` that feeds GitHub Spec Kit |
 | `mvp-stack` | Surveys the ecosystem and decides adopt / reuse / build per capability |
-| `spike` | Runs a time-boxed experiment and rules on works / affordable / maintainable |
+| `tech-feasibility` | Tests the developer's intended approach with a time-boxed spike: works / affordable / maintainable |
 
 Inspect a skill:
 
