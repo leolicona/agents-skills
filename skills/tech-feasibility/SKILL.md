@@ -1,12 +1,12 @@
 ---
 name: tech-feasibility
 description: >-
-  Researches whether a project is technically feasible: takes the approach the
-  developer already has in mind, tests its riskiest assumption with a
-  time-boxed spike, and rules on works / affordable / maintainable. Use when
-  asked if an idea is viable, whether X can be built with Y, to research
-  feasibility, or to run a spike or proof of concept.
-tags: [feasibility, research, spike, experiment, spec-driven-development]
+  Validates whether a project is technically feasible with what already
+  exists: interviews the developer for the approach they have in mind, settles
+  what the documentation can settle, and spikes only what reading cannot. Use
+  when asked whether an idea is viable, whether X can be built with Y, what
+  already solves this, or to run a spike or proof of concept.
+tags: [feasibility, research, spike, build-vs-buy, spec-driven-development]
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch]
 ---
 
@@ -14,131 +14,134 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch]
 
 ## When to use this skill
 
-The project rests on a technical bet and documentation cannot settle it: does
-this approach hold up at our scale, inside our budget, on the platform we
-use.
+The project rests on a technical bet: can this be built with what already
+exists, inside the budget, by this developer.
 
-Where the line falls:
+Of the four product risks — value, usability, feasibility, business viability
+— this covers **feasibility** and the cost half of **viability**. Value and
+usability need users, not code: never let a green verdict pass as product
+validation.
 
-- *Which option should I choose?* → `mvp-stack`, which surveys and decides.
-- *Does the approach I already have in mind actually work here?* → this skill.
-- *Do users want this?* → neither. Running code cannot validate desire.
+Context: one developer building product with AI agents, and that developer
+decides. Their experience and the project's budget are pass/fail criteria
+here, not background.
 
-Of the four product risks — value, usability, feasibility, business
-viability — this skill covers **feasibility** and the cost half of
-**viability**. Value and usability need users, not code. Say so plainly
-rather than letting a green spike pass as product validation.
+## Three stages, cheapest first
 
-Context: one developer building product with AI agents. Their experience and
-the project's budget are pass/fail criteria here, not background.
+Run them in order. The cheapest test that could change the decision always
+goes first, and most approaches die or survive before a line of code is
+written.
 
-## Start from the developer's hypothesis
+**A. Interview** — what is the bet, and what would break it.
+**B. Desk research** — settle everything the documentation can settle.
+**C. Spike** — measure only what is left.
 
-The developer rarely arrives empty-handed: "I want to build the bot with
-Cloudflare's tools" is already an approach. Ask for it in the first turn — a
-spike run without it tests the wrong thing:
+## Stage A — interview
 
-1. What are you thinking of building this with, and what draws you to it?
-2. Which part of that are you least sure about?
-3. What would make you drop the approach?
+Read `projectbrief.md` first for the appetite and the run-cost ceiling, and
+the constitution (`memory/constitution.md` or `.specify/memory/constitution.md`)
+for constraints already decided. Then two rounds, three questions each.
 
-Then state the hypothesis in one line and name its **riskiest assumption** —
-the one that sinks the approach if it is false. That is what you test.
-Testing the comfortable assumption yields a green spike and a dead project.
+*Round 1 — the bet:*
 
-If there is no approach in mind, the question is *which option*, and that
-belongs to `mvp-stack` first.
+1. What will you build it with, what draws you to that, and what did you
+   consider and drop?
+2. Which of those pieces are boring for you — already in production — and
+   which are new?
+3. What would make you abandon this approach?
 
-## Choose the shape of the test
+*Round 2 — the scenario, which becomes the pass criterion:*
 
-- **One unproven point** → a component probe: the smallest program that
-  exercises just that point.
-- **Two or more unproven integrations** → a thin end-to-end slice, a walking
-  skeleton: a tiny implementation that performs one complete function and
-  links the main components together. Feasibility usually dies at the seams,
-  not inside a box — a webhook that answers fast in isolation says nothing
-  about verify → store → generate → reply inside the provider's window.
+4. Describe the moment of highest stress: what triggers it, how often, and
+   under what conditions.
+5. What must happen then, and with what number and threshold do we measure
+   it?
+6. When it fails, what should happen — and do you know how these pieces fail?
 
-A walking skeleton built as a spike is still throwaway. If you mean to keep
-and refine it — the tracer-bullet style — it stops being a spike: it is the
-first slice of the plan and must meet production standards. Decide which one
-you are building before you start, never after it works.
+Then write the hypothesis in one line, and under it the assumptions it rests
+on, ranked by what sinks the approach if false. **Test the riskiest, never
+the comfortable one**: a green result on a comfortable assumption is a dead
+project with good paperwork.
 
-## How to work
+Risk concentrates in the new pieces — the developer already knows the failure
+modes of the boring ones. An MVP affords about one new technology; if
+question 2 turns up three, say so now rather than after the spike.
 
-1. **Gather the constraints.** Read `projectbrief.md` (appetite, run-cost
-   ceiling) and `mvp-stack.md` (the developer's stack, the blocked decision).
-   If they do not exist, ask what decision this unblocks, what they already
-   run and know, and the ceilings in money and hours.
-2. **Write the question before touching code**: one falsifiable question
-   aimed at the riskiest assumption, a pass criterion you could show someone,
-   the time box, the decision it unblocks, and the fallback if it fails. Show
-   all five and get a go.
-3. **Build it in the developer's stack**, and execute for real: real API,
-   real payload sizes, real rate limits, real cold starts. Proving it in a
-   technology they will never operate proves nothing.
-4. **Stop at the time box.** Inconclusive is a legitimate result and the
-   fallback applies. Do not extend.
-5. **Record, recommend, clean up**: raw output in the file, the throwaway
-   code deleted, anything you created torn down, and what the spike cost.
+## Stage B — desk research
 
-## The three verdicts
+For each assumption, try to settle it by reading, before touching code. Name
+each capability the MVP needs in vendor-neutral terms — "receive and verify
+inbound webhooks", not "use Workers" — and ask what already solves it whole
+before considering building it.
 
-Every spike answers all three, and **a yes on the first with a no on either
-of the others is a no**:
+Check, in this order:
 
-| Verdict | Question |
-| --- | --- |
-| **Works** | Does it hold under real conditions and documented limits? |
-| **Affordable** | What does it cost at MVP scale and at 10x, against the ceiling? |
-| **Maintainable** | Can this developer operate and debug it with what they know — and if not, how many hours of the appetite does learning it take? |
+- **Hard limits**: rate limits, payload sizes, timeouts, message windows,
+  quotas, regions. These kill designs late; find them first.
+- **Price** at MVP scale and at 10x, against the ceiling from the brief.
+- **Runtime fit**: does it run where you already deploy? Many SDKs assume
+  APIs an edge runtime does not have.
+- **Is it alive**: last release, open issues, whether the vendor still sells
+  it.
+- **Known failure modes**, and the exit cost if it has to be swapped.
+- **Compliance**, when the capability touches personal data.
 
-The third is the one everyone skips: an MVP dies from a stack its one
-developer cannot debug at 2am as surely as from a missing feature.
+Every assumption leaves this stage in one of three states:
 
-## Rules
+| State | Meaning | What follows |
+| --- | --- | --- |
+| **Refuted** | the documentation says it cannot work | change the approach now — the cheapest good news you will get |
+| **Confirmed on paper** | promised by the vendor, plausible | proceed, with the residual risk written down |
+| **Unresolved** | reading cannot answer it | goes to stage C |
 
-- **Ask before spending.** Confirm before you spend money or quota, create
-  cloud resources or use real credentials. Prefer sandbox numbers, free tiers
-  and synthetic data; never run against production data.
-- **One question per spike.** A second question is a second spike.
-- **2-4 hours, a day at the very most.** It comes out of the appetite.
-- **Measure, never infer.** No verdict from documentation alone: docs say
-  what is promised, the spike says what happens.
-- **Spike code is throwaway.** It lives under `spikes/<id>/`, is never merged
-  and is never imported by the product. If it turns out to be worth keeping,
-  it gets rewritten during the plan phase.
-- **Record failures with the same care as passes.** A recorded dead end saves
-  the next month; an unrecorded one gets repeated.
-- **Test the assumption that could break the approach**, not the one that
-  confirms it. The developer picked this bet; your job is to try to falsify
-  it while there is still time to change course.
-- **Never decide for the developer.** Deliver verdict plus recommendation.
-- Never edit `specs/`, `memory/constitution.md` or `.specify/`.
+**Documentation can kill an approach outright, but never certify one.** It
+states what is promised, not what happens under load, cold, with your
+payloads. So *confirmed on paper* is not enough for the riskiest assumption:
+that one still gets measured.
+
+Rules for this stage:
+
+- Verify against the vendor's own documentation, never from memory. A blog
+  post is a lead, not evidence.
+- Record the URL and the date checked for every limit and price. An
+  unverified number is an open question, not a fact.
+- Record every rejected alternative in one line. Half the value of this stage
+  is what you ruled out, and it is where the fallback comes from.
+- Default to adopting what exists. Build only the differentiator — the part
+  that makes the product yours.
+
+## Stage C — spike
+
+Only for **unresolved** assumptions, and only after stage B: never spike what
+you did not first try to settle by reading.
+
+Read `references/spike.md` before running one. It covers the shape of the
+test, the spike card you get approved before writing code, the spending gate,
+the time box, the three verdicts and the cleanup.
+
+If stage B leaves nothing unresolved, there is no spike: declare it feasible
+on paper and name the residual risk.
 
 ## Output
 
-Write `spikes/<NNN>-<slug>.md` from `references/spike-template.md`, and add
-the result row back to the *Spikes* table in `mvp-stack.md` when it exists.
+Write `feasibility.md` from `references/feasibility-template.md`, and one
+record per experiment under `spikes/`. Report the path, the verdict and what
+stayed open.
 
-## Example
+## Rules
 
-Support bot on WhatsApp Cloud API. Hypothesis: *"build it with Cloudflare
-Workers, KV and R2, which I already run"*. Riskiest assumption: the whole
-inbound path fits the provider's webhook window — so the shape is a thin
-end-to-end slice, not a probe.
-
-```text
-Question:  Does verify -> store -> generate -> reply complete inside the
-           provider's webhook window at 20 messages/second?
-Pass:      p95 under the documented timeout, zero rejected signatures,
-           over a 200-message burst.
-Box:       3 hours.   Unblocks: the platform choice.
-Fallback:  queue-backed handler that acknowledges first, processes after.
-```
+- **Never invent.** Anything unsettled becomes
+  `[NEEDS CLARIFICATION: what is missing - optionA/optionB?]`.
+- **Never decide for the developer.** Deliver findings, verdict and a
+  recommendation; the decision is theirs.
+- **Stay inside the appetite.** Research and spikes are spent from it, not
+  added to it.
+- **One page plus the tables.** Depth goes into the spike records.
+- Never edit `specs/`, the constitution or `.specify/`.
 
 ## Spec-driven development
 
-A spike is Phase 0 research: its verdicts fill the **Technical Context** and
-constraints that `/speckit.plan` needs. Hand the file over; let the command
+This is Phase 0 research: the verdicts and limits fill the **Technical
+Context** that `/speckit.plan` needs (language, dependencies, storage,
+platform, constraints, scale). Hand `feasibility.md` over and let the command
 write `plan.md` and `research.md`.

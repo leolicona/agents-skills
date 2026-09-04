@@ -42,6 +42,9 @@ Unblocks: <the decision this was run for>
 ## Recommendation
 <What to do, and what was learned that the question did not ask about.>
 
+## Fed back to feasibility.md
+<Which assumption row this settles, and how.>
+
 ## Cost of this spike
 <Money, quota and hours spent. Resources created and torn down.>
 
