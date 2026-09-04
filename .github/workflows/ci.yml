@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['18.x', '20.x', '22.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Validar el catalogo de skills
+        run: npm run validate
+      - name: Pruebas
+        run: npm test
+      - name: Instalacion de extremo a extremo
+        run: |
+          mkdir -p /tmp/demo
+          node bin/cli.mjs add --all --target all --dir /tmp/demo
+          test -f /tmp/demo/.claude/skills/project-brief/SKILL.md
+          test -f /tmp/demo/.opencode/skill/project-brief/SKILL.md
+          grep -q 'agent-skills:start' /tmp/demo/AGENTS.md

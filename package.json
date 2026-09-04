@@ -1,0 +1,52 @@
+{
+  "name": "@leolicona/agent-skills",
+  "version": "0.1.0",
+  "description": "Catalog of SKILL.md skills for AI agents, installable with npx into Claude Code, OpenCode and AGENTS.md",
+  "type": "module",
+  "bin": {
+    "agent-skills": "bin/cli.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs",
+    "./skills/*": "./skills/*"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "validate": "node scripts/validate-skills.mjs",
+    "check": "npm run validate && npm test"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "skills",
+    "skill-md",
+    "claude-code",
+    "opencode",
+    "agents-md",
+    "cli",
+    "npx"
+  ],
+  "author": "leolicona",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leolicona/agents-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leolicona/agents-skills/issues"
+  },
+  "homepage": "https://github.com/leolicona/agents-skills#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
