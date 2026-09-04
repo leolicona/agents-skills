@@ -1,160 +1,152 @@
 ---
 name: project-brief
 description: >-
-  Entrevista al usuario por rondas de preguntas y redacta con sus respuestas
-  un brief de proyecto en Markdown. Usala cuando pidan crear, arrancar o
-  completar un brief, un project brief o un documento de arranque de
-  proyecto.
-tags: [producto, descubrimiento, entrevista, documentacion]
+  Interviews the user with a short series of questions and turns the answers
+  into a projectbrief.md. Use when the user asks to create, start, or fill in
+  a project brief, a project kickoff document, or a brief for a new project.
+tags: [product, discovery, interview, documentation]
 allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
 
-# Brief de proyecto
+# Project brief
 
-## Cuando usar esta skill
+## When to use this skill
 
-- "Hazme un brief", "arranquemos el proyecto X", "necesito un documento de
-  arranque", "project brief".
-- Hay un brief a medias y hay que completarlo o actualizarlo.
+- "Write me a project brief", "let's kick off project X", "I need a brief
+  for this", "start a projectbrief".
+- A `projectbrief.md` already exists and needs to be completed or updated.
 
-No la uses para una especificacion tecnica ni un plan de implementacion: el
-brief responde **que** y **por que**, no **como**.
+Do not use it for a technical spec or an implementation plan: the brief
+answers **what** and **why**, not **how**.
 
-## Como trabajar
+## How to work
 
-1. **Lee antes de preguntar.** Revisa README, `docs/`, issues abiertas y
-   briefs previos. Nunca gastes una pregunta en algo que ya esta escrito;
-   en su lugar confirma: "veo que el stack es X, sigue siendo asi?".
-2. **Entrevista por rondas.** Maximo 3 preguntas por turno, numeradas y en
-   lenguaje llano. Nada de cuestionarios de veinte puntos.
-3. **Refleja y confirma.** Cierra cada ronda resumiendo en una o dos frases
-   lo que entendiste y pide correccion antes de avanzar.
-4. **Persigue lo vago.** "Rapido", "escalable", "mejor experiencia" no son
-   respuestas: pide un numero, un plazo, un ejemplo concreto o el caso real
-   que lo motiva.
-5. **Registra los huecos.** Si la respuesta es "no se" o "ya veremos", no
-   inventes: va tal cual a *Preguntas abiertas*.
-6. **Redacta** con la plantilla de abajo y **guarda** en
-   `docs/briefs/<slug>.md` (o donde el repo ya guarde documentos).
-7. **Entrega** diciendo la ruta del archivo y listando lo que quedo abierto.
+1. **Read before you ask.** Check the README, `docs/`, open issues and any
+   existing `projectbrief.md`. Never spend a question on something already
+   written down — confirm it instead: "the README says the stack is X, still
+   true?"
+2. **Ask in rounds, at most 3 questions per turn**, numbered and in plain
+   language. Never dump the whole questionnaire at once.
+3. **Reflect and confirm.** Close each round with a one- or two-sentence
+   summary of what you understood and ask for corrections.
+4. **Push back on vague answers.** "Fast", "scalable", "better UX" are not
+   answers: ask for a number, a date, or a concrete example.
+5. **Record the gaps.** If the answer is "I don't know" or "we'll see", it
+   goes to *Open questions* verbatim. Never invent a plausible answer.
+6. **Write `projectbrief.md`** using the template below.
+7. **Report** the file path and list what is still open.
 
-## Rondas de la entrevista
+## The interview
 
-Adapta las preguntas al contexto; el orden importa porque cada ronda apoya
-la siguiente.
+### Round 1 — identity and problem
 
-**1. Problema y contexto**
-- Que problema resuelve este proyecto y de quien es ese problema?
-- Que pasa hoy sin esto? Como se resuelve por ahora?
-- Por que ahora y no el trimestre que viene?
+1. What is the project name, and how would you describe it in one sentence?
+2. What problem does it solve, and who is it for?
+3. What happens today without it — how do people work around the problem?
 
-**2. Usuarios y uso**
-- Quien lo va a usar, y con que frecuencia?
-- Cuentame el recorrido principal, de principio a fin.
-- Que otros actores se ven afectados (soporte, ventas, legal, operaciones)?
+### Round 2 — goals and boundaries
 
-**3. Alcance**
-- Que tiene que existir si o si en la primera version utilizable?
-- Que dejamos fuera a proposito, aunque suene tentador?
-- Hay algo que ya exista y se pueda reutilizar en lugar de construir?
+4. What are the top three goals or success criteria? How will you know each
+   one was met?
+5. What is explicitly out of scope for this project?
+6. Is there anything that already exists and can be reused instead of built?
 
-**4. Exito**
-- Como sabremos, en numeros, que funciono?
-- Cual es el umbral que separa exito de fracaso, y en que plazo?
-- Con que dato se mide hoy eso, y si no existe, quien lo instrumenta?
+### Round 3 — timeline, risks and dependencies
 
-**5. Restricciones**
-- Fecha limite real y de donde sale esa fecha.
-- Quien trabaja en esto y con cuanta dedicacion.
-- Tecnologia, proveedores o procesos obligatorios; presupuesto; requisitos
-  legales o de privacidad.
+7. What is the deadline, and where does that date come from? Any milestones
+   in between?
+8. What could sink this project — the risks you already worry about?
+9. What or whom does this depend on (teams, vendors, APIs, approvals), and
+   what happens if that slips?
 
-**6. Riesgos y supuestos**
-- Que podria hundir el proyecto?
-- Que estamos dando por hecho sin haberlo comprobado?
-- De quien dependemos y que pasa si esa dependencia se retrasa?
+Ask round 3 even if the user only wanted the first questions: the brief has
+sections for timeline, risks and dependencies, and empty sections there are
+what make a brief useless.
 
-## Plantilla del brief
+## Output: `projectbrief.md`
+
+Write it to `projectbrief.md` in the project root, unless the repository
+keeps documents elsewhere (`docs/`) — then follow that convention and say
+where you put it.
 
 ```markdown
-# Brief: <nombre del proyecto>
+# Project brief: <project name>
 
-Estado: borrador | revisado | aprobado
-Fecha: AAAA-MM-DD
-Responsable: <nombre>
+Status: draft | reviewed | approved
+Date: YYYY-MM-DD
+Owner: <name>
 
-## Resumen en una frase
-<Que se va a hacer, para quien y para lograr que.>
+## Summary
+<One sentence: what this is, for whom, and what it achieves.>
 
-## Problema
-<Situacion actual, a quien le duele y que cuesta hoy.>
+## Problem
+<The situation today, who it hurts, and what it costs.>
 
-## Usuarios y necesidad
-<Perfiles principales y el recorrido que deben poder completar.>
+## Audience
+<Who uses this, how often, and which other groups are affected.>
 
-## Objetivos
-1. <Cambio observable, no funcionalidad.>
-
-## Fuera de alcance
-- <Lo que explicitamente no se hace en esta version.>
-
-## Metricas de exito
-| Metrica | Umbral | Plazo | Como se mide |
+## Goals and success criteria
+| # | Goal | How we measure it | Target |
 | --- | --- | --- | --- |
+| 1 | | | |
+| 2 | | | |
+| 3 | | | |
 
-## Restricciones
-<Plazo, equipo, presupuesto, tecnologia obligada, legal.>
+## Out of scope
+- <Explicitly not part of this project.>
 
-## Riesgos y supuestos
-| Riesgo o supuesto | Impacto | Como lo reducimos |
+## Timeline
+| Milestone | Target date | What it proves |
 | --- | --- | --- |
 
-## Hitos
-| Hito | Fecha objetivo | Que demuestra |
+## Risks and dependencies
+| Risk or dependency | Impact | Mitigation or owner |
 | --- | --- | --- |
 
-## Preguntas abiertas
-- [ ] <Pregunta sin responder> — responsable: <quien> 
+## Open questions
+- [ ] <Unanswered question> — owner: <who>
 
-## Decisiones tomadas
-| Fecha | Decision | Por que | Alternativa descartada |
+## Decisions
+| Date | Decision | Why | Alternative rejected |
 | --- | --- | --- | --- |
 ```
 
-## Reglas
+## Rules
 
-- **Nunca inventes contenido.** Todo lo que no dijo el usuario va a
-  *Preguntas abiertas*, no a un parrafo plausible.
-- **Maximo 3 preguntas por turno**, y para en cuanto tengas lo necesario:
-  una entrevista larga se abandona a la mitad.
-- **Un objetivo no es una funcionalidad.** "Login con Google" es un medio;
-  "reducir el abandono en el registro del 40% al 20%" es un objetivo.
-- **Cada objetivo lleva metrica, umbral y plazo.** Si algo no se puede
-  medir hoy, escribelo asi en lugar de fingir una metrica.
-- **El brief cabe en dos paginas.** El detalle tecnico va a otro documento
-  enlazado desde aqui.
-- **Confirma antes de escribir el archivo** y muestra la ruta al terminar.
-- Si el usuario quiere cortar la entrevista, redacta el brief con lo que
-  haya y deja el resto marcado como abierto: un brief parcial y honesto
-  sirve; uno completo e inventado, no.
-- Escribe el brief en el idioma en que te hablo el usuario.
+- **Never invent content.** Anything the user did not say belongs in *Open
+  questions*, not in a confident paragraph.
+- **Write the brief in English**, even when the interview happened in
+  another language. Ask the questions in the language the user is using.
+- **At most 3 questions per turn**, and stop once you have what you need: a
+  long interview gets abandoned halfway.
+- **Exactly three goals.** If the user lists more, ask which three matter
+  most and move the rest to a "later" note under *Out of scope*.
+- **A goal is an outcome, not a feature.** "Google login" is a means;
+  "cut signup abandonment from 40% to 20%" is a goal.
+- **Out of scope must not be empty.** If the user has no answer, ask what
+  someone might wrongly assume is included, and record that.
+- **The brief fits on one page.** Technical detail goes into a separate
+  document linked from here.
+- **Confirm before writing the file**, and show the path once written.
+- If the user cuts the interview short, write the brief with what you have
+  and mark the rest as open. A partial, honest brief is useful; a complete,
+  invented one is not.
 
-## Ejemplo
+## Example
 
-Respuesta vaga del usuario y como repreguntar:
+Chasing a vague answer:
 
 ```text
-Usuario: Queremos que la app sea mas rapida.
-Agente:  Para poder medirlo: que pantalla se siente lenta hoy, cuanto tarda
-         ahora y en cuanto seria aceptable? Si no tienes el numero a mano,
-         lo dejo como pregunta abierta.
+User:  We want the app to be faster.
+Agent: So I can measure it: which screen feels slow today, how long does it
+       take now, and what would be acceptable? If you don't have the number,
+       I'll log it as an open question.
 ```
 
-Objetivo mal y bien escrito:
+A goal written badly and well:
 
 ```text
-Mal:  Mejorar la experiencia del checkout.
-Bien: Bajar el abandono del checkout del 38% al 25% antes del 30 de junio,
-      medido con el embudo de analitica que ya registra `checkout_started`
-      y `order_placed`.
+Bad:  Improve the checkout experience.
+Good: Cut checkout abandonment from 38% to 25% by June 30, measured with the
+      existing analytics funnel (`checkout_started` -> `order_placed`).
 ```

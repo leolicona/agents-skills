@@ -55,7 +55,7 @@ Todo lo que escribas fuera de los marcadores se conserva intacto:
 ## Skills disponibles
 | Skill | Cuando usarla | Archivo |
 | --- | --- | --- |
-| `project-brief` | Entrevista al usuario... | `.claude/skills/project-brief/SKILL.md` |
+| `project-brief` | Interviews the user... | `.claude/skills/project-brief/SKILL.md` |
 <!-- agent-skills:end -->
 ```
 
@@ -63,7 +63,7 @@ Todo lo que escribas fuera de los marcadores se conserva intacto:
 
 | Skill | Para que sirve |
 | --- | --- |
-| `project-brief` | Entrevista al usuario por rondas y redacta un brief de proyecto en Markdown |
+| `project-brief` | Entrevista al usuario por rondas y escribe un `projectbrief.md` (en ingles) |
 
 Ver el detalle de una skill:
 

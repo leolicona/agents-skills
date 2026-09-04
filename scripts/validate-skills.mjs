@@ -42,13 +42,13 @@ for (const skill of skills) {
   if (!skill.description) errors.push(`${at}: falta "description" en el frontmatter`);
   else if (skill.description.length > MAX_DESCRIPTION) {
     errors.push(`${at}: description de ${skill.description.length} caracteres (max ${MAX_DESCRIPTION})`);
-  } else if (!/\busala\b|\busar\b|\bcuando\b/i.test(skill.description)) {
+  } else if (!/\busala\b|\busar\b|\bcuando\b|\buse\b|\bwhen\b/i.test(skill.description)) {
     warnings.push(`${at}: la description no dice cuando usar la skill`);
   }
 
   const lines = skill.body.split('\n').length;
   if (lines > MAX_LINES) warnings.push(`${at}: ${lines} lineas (recomendado < ${MAX_LINES})`);
-  if (!/##\s+Cuando usar/i.test(skill.body)) {
+  if (!/##\s+(Cuando usar|When to use)/i.test(skill.body)) {
     warnings.push(`${at}: falta la seccion "Cuando usar esta skill"`);
   }
 }
