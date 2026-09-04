@@ -1,59 +1,63 @@
-# Contribuir
+# Contributing
 
-## Requisitos
+## Requirements
 
-Node >= 18.17. No hay dependencias que instalar.
+Node >= 18.17. There are no dependencies to install.
 
-## Anadir una skill
+## Adding a skill
 
 ```bash
-node bin/cli.mjs new mi-skill      # crea skills/mi-skill/SKILL.md
+node bin/cli.mjs new my-skill      # creates skills/my-skill/SKILL.md
 ```
 
-1. Rellena `description`: debe decir **que hace** y **cuando usarla**, en una
-   frase de menos de 500 caracteres, con las palabras que usaria quien pide la
-   tarea.
-2. Escribe el cuerpo con secciones accionables: "Cuando usar esta skill",
-   "Como trabajar" (pasos numerados), "Reglas" y al menos un ejemplo real.
-   `skills/project-brief/SKILL.md` sirve de referencia de estilo.
-3. Valida y prueba:
+1. Fill in `description`: it must say **what it does** and **when to use it**,
+   in one sentence under 500 characters, using the words someone would
+   actually type when asking for that task.
+2. Write the body as actionable sections: "When to use this skill", "How to
+   work" (numbered steps), "Rules" and at least one real example.
+   `skills/project-brief/SKILL.md` is the style reference.
+3. Validate and test:
 
 ```bash
 npm run check
 ```
 
-## Que valida el CI
+## What CI validates
 
-`scripts/validate-skills.mjs` falla si:
+`scripts/validate-skills.mjs` fails when:
 
-- una carpeta de `skills/` no tiene `SKILL.md`;
-- falta `name` o `description`, o `name` no coincide con la carpeta;
-- la carpeta no esta en kebab-case;
-- la `description` supera 500 caracteres.
+- a folder under `skills/` has no `SKILL.md`;
+- `name` or `description` is missing, or `name` does not match the folder;
+- the folder is not in kebab-case;
+- the `description` is longer than 500 characters;
+- the catalog is empty.
 
-Ademas avisa (sin fallar) cuando la descripcion no indica cuando usar la
-skill, cuando falta la seccion "Cuando usar esta skill" o cuando el archivo
-supera 500 lineas.
+It also warns (without failing) when the description does not say when to use
+the skill, when the "When to use this skill" section is missing, or when the
+file goes over 500 lines.
 
-## Criterios de aceptacion
+## Acceptance criteria
 
-- **Una skill, un trabajo.** Si el titulo necesita una "y", son dos skills.
-- **Instrucciones, no ensayos.** Imperativo, pasos, reglas incumplibles.
-- **Al menos un ejemplo concreto**, con entrada y salida esperada.
-- **Nada de obviedades** que el agente ya cumple por defecto.
-- **Sin secretos** ni rutas internas ni datos personales.
+- **One skill, one job.** If the title needs an "and", it is two skills.
+- **Instructions, not essays.** Imperative, steps, rules that can be broken.
+- **At least one concrete example**, with input and expected output.
+- **No truisms** the agent already follows by default.
+- **No secrets**, internal paths or personal data.
 
-## Estructura del repositorio
+## Repository layout
 
 ```
-bin/cli.mjs              punto de entrada del CLI
-src/                     nucleo (registro, destinos, AGENTS.md, comandos)
-skills/<skill>/SKILL.md  el catalogo
-scripts/                 validacion
-test/                    pruebas con node:test
+bin/cli.mjs              CLI entry point
+src/                     core (registry, targets, AGENTS.md, commands)
+skills/<skill>/SKILL.md  the catalog
+scripts/                 validation
+test/                    tests with node:test
 ```
 
-## Publicar
+Tests run against a fixture catalog in `test/fixtures/catalog/`, not against
+the published skills, so adding or removing a skill never breaks the suite.
+
+## Publishing
 
 ```bash
 npm version <patch|minor|major>

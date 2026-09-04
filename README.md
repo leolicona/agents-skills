@@ -1,54 +1,54 @@
 # agents-skills
 
-Catalogo de **skills** (`SKILL.md`) para agentes de IA, instalables en cualquier
-proyecto con un solo comando `npx`.
+A catalog of **skills** (`SKILL.md`) for AI agents, installable into any
+project with a single `npx` command.
 
-Una skill es una carpeta con un `SKILL.md`: instrucciones especializadas que el
-agente carga solo cuando la tarea lo pide. Este repositorio es a la vez el
-catalogo y el instalador.
+A skill is a folder with a `SKILL.md` inside: specialized instructions the
+agent loads only when the task calls for them. This repository is both the
+catalog and the installer.
 
 ```bash
 npx @leolicona/agent-skills add project-brief
 ```
 
-## Inicio rapido
+## Quick start
 
 ```bash
-# Ver el catalogo
+# Browse the catalog
 npx @leolicona/agent-skills list
 
-# Instalar todas las skills en el proyecto actual
+# Install every skill into the current project
 npx @leolicona/agent-skills add --all
 
-# Ver que hay instalado
+# See what is installed
 npx @leolicona/agent-skills installed
 ```
 
-No necesitas instalar nada de forma permanente ni tener dependencias: el CLI
-funciona con Node >= 18.17 y no usa paquetes externos.
+Nothing to install permanently and no dependencies to pull: the CLI runs on
+Node >= 18.17 and uses no external packages.
 
-## Destinos soportados
+## Supported targets
 
-El CLI detecta automaticamente que agentes usa el proyecto y copia la skill al
-directorio correcto:
+The CLI detects which agents the project uses and copies the skill into the
+right directory:
 
-| Destino | Directorio | Se detecta por |
+| Target | Directory | Detected by |
 | --- | --- | --- |
-| `claude` | `.claude/skills/<skill>/` | existe `.claude/` |
-| `opencode` | `.opencode/skill/<skill>/` | existe `.opencode/` |
-| `agents-md` | bloque gestionado en `AGENTS.md` | existe `AGENTS.md` |
+| `claude` | `.claude/skills/<skill>/` | `.claude/` exists |
+| `opencode` | `.opencode/skill/<skill>/` | `.opencode/` exists |
+| `agents-md` | managed block in `AGENTS.md` | `AGENTS.md` exists |
 
-Si no se detecta ninguno, se instala en `.claude/skills/` (formato de
-referencia de `SKILL.md`). Puedes forzar destinos con `--target`:
+If none is detected, skills go to `.claude/skills/` (the reference layout for
+`SKILL.md`). Force the targets with `--target`:
 
 ```bash
 npx @leolicona/agent-skills add project-brief --target claude,opencode
 npx @leolicona/agent-skills add --all --target all
 ```
 
-`AGENTS.md` no guarda skills: mantiene un indice entre marcadores para que
-agentes como Codex, Cursor o Copilot sepan que skills existen y donde leerlas.
-Todo lo que escribas fuera de los marcadores se conserva intacto:
+`AGENTS.md` does not store skills: it keeps an index between markers so that
+agents like Codex, Cursor or Copilot know which skills exist and where to read
+them. Anything you write outside the markers is left untouched:
 
 ```markdown
 <!-- agent-skills:start -->
@@ -59,85 +59,88 @@ Todo lo que escribas fuera de los marcadores se conserva intacto:
 <!-- agent-skills:end -->
 ```
 
-## Catalogo
+## Catalog
 
-| Skill | Para que sirve |
+| Skill | What it does |
 | --- | --- |
-| `project-brief` | Entrevista al usuario por rondas y escribe un `projectbrief.md` (en ingles) |
+| `project-brief` | Interviews the user in rounds and writes a `projectbrief.md` |
 
-Ver el detalle de una skill:
+Inspect a skill:
 
 ```bash
 npx @leolicona/agent-skills info project-brief
 ```
 
-## Comandos
+## Commands
 
-| Comando | Que hace |
+| Command | What it does |
 | --- | --- |
-| `list [texto]` | Lista el catalogo, filtrando por texto libre |
-| `info <skill>` | Muestra metadatos y contenido de una skill |
-| `add <skill...>` | Instala skills (`--all` para todas) |
-| `remove <skill...>` | Elimina skills instaladas |
-| `installed` | Muestra que hay instalado en el proyecto |
-| `sync` | Regenera el bloque de skills en `AGENTS.md` |
-| `new <nombre>` | Crea el esqueleto de una skill nueva |
+| `list [text]` | Lists the catalog, filtered by free text |
+| `info <skill>` | Shows a skill's metadata and contents |
+| `add <skill...>` | Installs skills (`--all` for every one) |
+| `remove <skill...>` | Removes installed skills |
+| `installed` | Shows what is installed in the project |
+| `sync` | Regenerates the skills block in `AGENTS.md` |
+| `new <name>` | Scaffolds a new skill |
 
-Opciones: `--target`, `--dir`, `--all`, `--force`, `--dry-run`, `--json`,
+Options: `--target`, `--dir`, `--all`, `--force`, `--dry-run`, `--json`,
 `--long`, `--help`, `--version`.
 
 ```bash
-# Simular sin escribir
+# Dry run, writes nothing
 npx @leolicona/agent-skills add --all --dry-run
 
-# Instalar en otro proyecto
-npx @leolicona/agent-skills add project-brief --dir ../otro-proyecto
+# Install into another project
+npx @leolicona/agent-skills add project-brief --dir ../another-project
 
-# Sobrescribir una skill modificada localmente
+# Overwrite a skill you edited locally
 npx @leolicona/agent-skills add project-brief --force
 ```
 
-## Anatomia de una skill
+Point the CLI at a different catalog (a private one, for instance) with the
+`AGENT_SKILLS_CATALOG` environment variable.
+
+## Anatomy of a skill
 
 ```
-skills/mi-skill/
-  SKILL.md          # obligatorio
-  references/       # documentacion larga, se lee bajo demanda
-  scripts/          # utilidades ejecutables
-  assets/           # plantillas y ejemplos
+skills/my-skill/
+  SKILL.md          # required
+  references/       # long documentation, read on demand
+  scripts/          # executable helpers
+  assets/           # templates and examples
 ```
 
 ```markdown
 ---
-name: mi-skill
+name: my-skill
 description: >-
-  Que hace la skill y cuando debe usarla el agente, en una frase.
-tags: [ambito, tema]
+  What the skill does and when the agent should use it, in one sentence.
+tags: [area, topic]
 allowed-tools: [Read, Bash]
 ---
 
-# Mi skill
+# My skill
 
-## Cuando usar esta skill
-## Como trabajar
-## Reglas
-## Ejemplo
+## When to use this skill
+## How to work
+## Rules
+## Example
 ```
 
-La `description` es el disparador: es lo unico que el agente lee antes de
-decidir si abre la skill. `CONTRIBUTING.md` explica como escribirla.
+The `description` is the trigger: it is the only thing the agent reads before
+deciding whether to open the skill. `CONTRIBUTING.md` explains how to write it.
 
-## Contribuir
+## Contributing
 
 ```bash
 git clone https://github.com/leolicona/agents-skills.git
 cd agents-skills
-npx @leolicona/agent-skills new mi-skill --dir .   # o: node bin/cli.mjs new mi-skill
-npm run check                                      # valida el catalogo y corre las pruebas
+npx @leolicona/agent-skills new my-skill --dir .   # or: node bin/cli.mjs new my-skill
+npm run check                                      # validates the catalog and runs the tests
 ```
 
-Detalles en [CONTRIBUTING.md](CONTRIBUTING.md).
+Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Licencia
+## License
 
 MIT
