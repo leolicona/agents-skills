@@ -25,6 +25,6 @@ jobs:
         run: |
           mkdir -p /tmp/demo
           node bin/cli.mjs add --all --target all --dir /tmp/demo
-          test -f /tmp/demo/.claude/skills/code-review/SKILL.md
-          test -f /tmp/demo/.opencode/skill/code-review/SKILL.md
+          test -f /tmp/demo/.claude/skills/project-brief/SKILL.md
+          test -f /tmp/demo/.opencode/skill/project-brief/SKILL.md
           grep -q 'agent-skills:start' /tmp/demo/AGENTS.md

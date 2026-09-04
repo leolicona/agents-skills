@@ -13,8 +13,9 @@ node bin/cli.mjs new mi-skill      # crea skills/mi-skill/SKILL.md
 1. Rellena `description`: debe decir **que hace** y **cuando usarla**, en una
    frase de menos de 500 caracteres, con las palabras que usaria quien pide la
    tarea.
-2. Escribe el cuerpo con secciones accionables. Lee `skills/skill-author/SKILL.md`:
-   es la guia de estilo de este repositorio.
+2. Escribe el cuerpo con secciones accionables: "Cuando usar esta skill",
+   "Como trabajar" (pasos numerados), "Reglas" y al menos un ejemplo real.
+   `skills/project-brief/SKILL.md` sirve de referencia de estilo.
 3. Valida y prueba:
 
 ```bash

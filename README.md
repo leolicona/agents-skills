@@ -8,7 +8,7 @@ agente carga solo cuando la tarea lo pide. Este repositorio es a la vez el
 catalogo y el instalador.
 
 ```bash
-npx @leolicona/agent-skills add conventional-commits code-review
+npx @leolicona/agent-skills add project-brief
 ```
 
 ## Inicio rapido
@@ -42,7 +42,7 @@ Si no se detecta ninguno, se instala en `.claude/skills/` (formato de
 referencia de `SKILL.md`). Puedes forzar destinos con `--target`:
 
 ```bash
-npx @leolicona/agent-skills add unit-tests --target claude,opencode
+npx @leolicona/agent-skills add project-brief --target claude,opencode
 npx @leolicona/agent-skills add --all --target all
 ```
 
@@ -55,7 +55,7 @@ Todo lo que escribas fuera de los marcadores se conserva intacto:
 ## Skills disponibles
 | Skill | Cuando usarla | Archivo |
 | --- | --- | --- |
-| `code-review` | Revisa un diff... | `.claude/skills/code-review/SKILL.md` |
+| `project-brief` | Entrevista al usuario... | `.claude/skills/project-brief/SKILL.md` |
 <!-- agent-skills:end -->
 ```
 
@@ -63,18 +63,12 @@ Todo lo que escribas fuera de los marcadores se conserva intacto:
 
 | Skill | Para que sirve |
 | --- | --- |
-| `code-review` | Revisa un diff o PR buscando defectos reales, con escenario de fallo |
-| `conventional-commits` | Mensajes de commit segun Conventional Commits, a partir del diff |
-| `debug-root-cause` | Diagnostico por hipotesis hasta la causa raiz |
-| `pull-request-description` | Titulo y descripcion de PR respetando la plantilla del repo |
-| `safe-refactor` | Refactor en pasos pequenos y verificables |
-| `skill-author` | Como escribir y auditar un `SKILL.md` |
-| `unit-tests` | Pruebas unitarias que fallan cuando el codigo esta mal |
+| `project-brief` | Entrevista al usuario por rondas y redacta un brief de proyecto en Markdown |
 
 Ver el detalle de una skill:
 
 ```bash
-npx @leolicona/agent-skills info code-review
+npx @leolicona/agent-skills info project-brief
 ```
 
 ## Comandos
@@ -97,10 +91,10 @@ Opciones: `--target`, `--dir`, `--all`, `--force`, `--dry-run`, `--json`,
 npx @leolicona/agent-skills add --all --dry-run
 
 # Instalar en otro proyecto
-npx @leolicona/agent-skills add code-review --dir ../otro-proyecto
+npx @leolicona/agent-skills add project-brief --dir ../otro-proyecto
 
 # Sobrescribir una skill modificada localmente
-npx @leolicona/agent-skills add code-review --force
+npx @leolicona/agent-skills add project-brief --force
 ```
 
 ## Anatomia de una skill
@@ -131,7 +125,7 @@ allowed-tools: [Read, Bash]
 ```
 
 La `description` es el disparador: es lo unico que el agente lee antes de
-decidir si abre la skill. La skill `skill-author` explica como escribirla.
+decidir si abre la skill. `CONTRIBUTING.md` explica como escribirla.
 
 ## Contribuir
 
