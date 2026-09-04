@@ -60,4 +60,6 @@ decided when scope had to bend to the appetite.
    project principles and constraints.
 2. `/speckit.specify` — feed it Summary, Problem, Audience, Success criteria
    and Out of scope; it writes `specs/###-feature/spec.md`.
+3. `mvp-stack` skill — decide what to adopt, reuse or build, before
+   `/speckit.plan`.
 ```

@@ -64,6 +64,7 @@ them. Anything you write outside the markers is left untouched:
 | Skill | What it does |
 | --- | --- |
 | `project-brief` | Interviews the user in rounds and writes a `projectbrief.md` that feeds GitHub Spec Kit |
+| `mvp-stack` | Surveys the ecosystem, decides adopt / reuse / build per capability, and time-boxes spikes |
 
 Inspect a skill:
 
