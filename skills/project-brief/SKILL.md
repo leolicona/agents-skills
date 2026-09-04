@@ -22,7 +22,8 @@ decides. Never ask about stakeholders, approvals or sign-off.
 
 ## How to work
 
-1. Read what exists first: `README`, `memory/constitution.md`, any
+1. Read what exists first: `README`, the constitution
+   (`memory/constitution.md` or `.specify/memory/constitution.md`), any
    `specs/*/spec.md` and any current `projectbrief.md`. Never ask what is
    already written down — confirm it instead.
 2. Ask in rounds, **3 questions per turn maximum**, numbered, each with a
@@ -90,10 +91,9 @@ drafting:
 
 ## Output
 
-Write `projectbrief.md` in the project root — or in `memory/` next to
-`constitution.md` when the repo has a `.specify/` directory, so Spec Kit's
-project-level context lives together. Follow
-`references/projectbrief-template.md`.
+Write `projectbrief.md` in the project root — or next to the constitution
+when the repo has one, so Spec Kit's project-level context lives together.
+Follow `references/projectbrief-template.md`.
 
 ## Spec-driven development
 
@@ -102,15 +102,15 @@ artifacts:
 
 | Brief section | Feeds |
 | --- | --- |
-| Appetite, capacity, run cost | `/speckit.constitution` → `memory/constitution.md` |
+| Appetite, capacity, run cost | `/speckit.constitution` → the constitution |
 | Summary, Problem, Audience, Success criteria, Out of scope | `/speckit.specify` → `specs/###-feature/spec.md` |
 | `[NEEDS CLARIFICATION]` markers | `/speckit.clarify` |
 
 - **Do not write what `spec.md` owns**: no user stories, no P1/P2 priorities,
   no functional requirements, no key entities. The brief stops at what and
   why, for the whole product; the spec covers one feature in depth.
-- **Never edit `specs/`, `memory/constitution.md` or `.specify/`** — those
-  belong to the Spec Kit commands.
+- **Never edit `specs/`, the constitution or `.specify/`** — those belong to
+  the Spec Kit commands.
 - Mark every unknown with the exact marker syntax
   `[NEEDS CLARIFICATION: what is missing - optionA/optionB?]` so
   `/speckit.clarify` and `/speckit.analyze` find them.

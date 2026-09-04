@@ -60,4 +60,6 @@ decided when scope had to bend to the appetite.
    project principles and constraints.
 2. `/speckit.specify` — feed it Summary, Problem, Audience, Success criteria
    and Out of scope; it writes `specs/###-feature/spec.md`.
+3. `tech-feasibility` skill — check the idea is buildable with what exists,
+   before `/speckit.plan`.
 ```
