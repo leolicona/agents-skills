@@ -63,7 +63,7 @@ them. Anything you write outside the markers is left untouched:
 
 | Skill | What it does |
 | --- | --- |
-| `project-brief` | Interviews the user in rounds and writes a `projectbrief.md` |
+| `project-brief` | Interviews the user in rounds and writes a `projectbrief.md` that feeds GitHub Spec Kit |
 
 Inspect a skill:
 
