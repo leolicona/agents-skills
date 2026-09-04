@@ -16,6 +16,9 @@ The user asks to create, start, complete or update a project brief or kickoff
 document. Not for a technical spec or an implementation plan: the brief
 answers **what** and **why**, not **how**.
 
+Context: one developer building product with AI agents, and that developer
+decides. Never ask about stakeholders, approvals or sign-off.
+
 ## How to work
 
 1. Read the README, `docs/` and any existing `projectbrief.md` first. Never
@@ -27,28 +30,34 @@ answers **what** and **why**, not **how**.
 5. Write `projectbrief.md` in the project root (or wherever the repo keeps
    docs), then report the path and what stayed open.
 
-## Rounds 1-3
+## Rounds 1-4
 
 1. **Identity and problem.** Project name and one-sentence description. What
    problem does it solve, and for whom? What happens today without it?
 2. **Goals and boundaries.** Top three goals or success criteria, and how
    each is measured. What is explicitly out of scope? Anything that already
    exists and can be reused?
-3. **Timeline and risk.** Deadline and where that date comes from. Risks.
-   Dependencies, and what happens if they slip.
+3. **Appetite, capacity and cost.** How much time is this worth — the budget
+   that constrains scope, not an estimate — and is there a real external
+   deadline? How many hours a week can you give it, and which parts do you
+   expect the agents to carry? What will it cost to run (APIs, tools,
+   hosting)?
+4. **Premortem.** "It is <appetite> from now, the project is dead. What
+   killed it?" — prospective hindsight surfaces concrete risks where "what
+   could go wrong" gets bland ones. Then: what does this depend on, and what
+   happens if that slips?
 
-Ask round 3 even if the user only wanted the first questions: the brief has
-those sections, and empty ones make it useless.
+Ask rounds 3 and 4 even if the user only wanted the first questions: the
+brief has those sections, and empty ones make it useless. When the appetite
+and the three goals cannot both be true, say so — that is the trade-off the
+brief exists to force.
 
-## Round 4 — synthesis (2 iterations maximum)
+## Round 5 — synthesis (2 iterations maximum)
 
-Read every answer together and ask **only** about what does not add up:
-
-- a goal that contradicts the out-of-scope list;
-- a metric with no data source today;
-- a deadline the three goals cannot fit into;
-- an audience missing from the problem statement, or the reverse;
-- anything still vague: "fast", "scalable", "better UX".
+Read every answer together and ask **only** about what does not add up: a
+goal that contradicts the out-of-scope list, a metric with no data source
+today, goals that do not fit the appetite, an audience missing from the
+problem statement, or anything still vague ("fast", "scalable", "better UX").
 
 Play back a two-line draft summary plus the three goals for confirmation.
 Then stop: after two iterations, whatever is unresolved goes to *Open
@@ -83,7 +92,6 @@ drafting:
 
 Status: draft | reviewed | approved
 Date: YYYY-MM-DD
-Owner: <name>
 
 ## Summary
 <One sentence: what this is, for whom, and what it achieves.>
@@ -101,16 +109,21 @@ Owner: <name>
 ## Out of scope
 - <Explicitly not part of this project.>
 
+## Appetite, capacity and cost
+- **Appetite:** <time this is worth; scope bends to fit it>
+- **Capacity:** <developer hours per week, and what the agents carry>
+- **Run cost:** <APIs, tools, hosting>
+
 ## Timeline
 | Milestone | Target date | What it proves |
 | --- | --- | --- |
 
 ## Risks and dependencies
-| Risk or dependency | Impact | Mitigation or owner |
+| Risk or dependency | Impact | Mitigation |
 | --- | --- | --- |
 
 ## Open questions
-- [ ] <Unanswered question> — owner: <who>
+- [ ] <Unanswered question>
 
 ## Decisions
 | Date | Decision | Why | Source |
@@ -126,6 +139,8 @@ Owner: <name>
   ask which three matter.
 - **Out of scope must not be empty.** If the user has none, ask what someone
   might wrongly assume is included.
+- **Scope bends to the appetite**, never the reverse: if the goals do not
+  fit, cut scope or drop a goal, and record which in *Decisions*.
 - **One page.** Technical detail goes in a separate linked document.
 - Confirm before writing the file, and show the path.
 - If the user cuts the interview short, write the brief with what you have
