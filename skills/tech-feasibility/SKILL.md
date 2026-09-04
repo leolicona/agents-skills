@@ -22,9 +22,12 @@ Where the line falls:
 
 - *Which option should I choose?* → `mvp-stack`, which surveys and decides.
 - *Does the approach I already have in mind actually work here?* → this skill.
-- *Do users want this?* → neither. Running code cannot validate desire. A
-  spike validates the **technical** assumption an idea rests on; say so
-  plainly rather than letting a green spike pass as product validation.
+- *Do users want this?* → neither. Running code cannot validate desire.
+
+Of the four product risks — value, usability, feasibility, business
+viability — this skill covers **feasibility** and the cost half of
+**viability**. Value and usability need users, not code. Say so plainly
+rather than letting a green spike pass as product validation.
 
 Context: one developer building product with AI agents. Their experience and
 the project's budget are pass/fail criteria here, not background.
@@ -46,6 +49,21 @@ Testing the comfortable assumption yields a green spike and a dead project.
 If there is no approach in mind, the question is *which option*, and that
 belongs to `mvp-stack` first.
 
+## Choose the shape of the test
+
+- **One unproven point** → a component probe: the smallest program that
+  exercises just that point.
+- **Two or more unproven integrations** → a thin end-to-end slice, a walking
+  skeleton: a tiny implementation that performs one complete function and
+  links the main components together. Feasibility usually dies at the seams,
+  not inside a box — a webhook that answers fast in isolation says nothing
+  about verify → store → generate → reply inside the provider's window.
+
+A walking skeleton built as a spike is still throwaway. If you mean to keep
+and refine it — the tracer-bullet style — it stops being a spike: it is the
+first slice of the plan and must meet production standards. Decide which one
+you are building before you start, never after it works.
+
 ## How to work
 
 1. **Gather the constraints.** Read `projectbrief.md` (appetite, run-cost
@@ -56,15 +74,13 @@ belongs to `mvp-stack` first.
    aimed at the riskiest assumption, a pass criterion you could show someone,
    the time box, the decision it unblocks, and the fallback if it fails. Show
    all five and get a go.
-3. **Build it in the developer's stack.** Proving something works in a
+3. **Build it in the developer's stack**, and execute for real: real API,
+   real payload sizes, real rate limits, real cold starts. Proving it in a
    technology they will never operate proves nothing.
-4. **Execute for real** — real API, real payload sizes, real rate limits,
-   real cold starts. Measure; never infer. Paste the raw output.
-5. **Stop at the time box.** Inconclusive is a legitimate result and the
+4. **Stop at the time box.** Inconclusive is a legitimate result and the
    fallback applies. Do not extend.
-6. **Record and recommend.** The decision stays with the developer.
-7. **Clean up**: delete the throwaway code, tear down anything you created,
-   and note what the spike itself cost.
+5. **Record, recommend, clean up**: raw output in the file, the throwaway
+   code deleted, anything you created torn down, and what the spike cost.
 
 ## The three verdicts
 
@@ -77,17 +93,14 @@ of the others is a no**:
 | **Affordable** | What does it cost at MVP scale and at 10x, against the ceiling? |
 | **Maintainable** | Can this developer operate and debug it with what they know — and if not, how many hours of the appetite does learning it take? |
 
-The third is the one teams skip and regret. An MVP dies from a stack its one
+The third is the one everyone skips: an MVP dies from a stack its one
 developer cannot debug at 2am as surely as from a missing feature.
-
-## Before spending anything
-
-Ask for confirmation before you spend money or quota, create cloud resources,
-or use real credentials. Prefer sandbox numbers, free tiers and synthetic
-data. Never run a spike against production data.
 
 ## Rules
 
+- **Ask before spending.** Confirm before you spend money or quota, create
+  cloud resources or use real credentials. Prefer sandbox numbers, free tiers
+  and synthetic data; never run against production data.
 - **One question per spike.** A second question is a second spike.
 - **2-4 hours, a day at the very most.** It comes out of the appetite.
 - **Measure, never infer.** No verdict from documentation alone: docs say
@@ -111,18 +124,17 @@ the result row back to the *Spikes* table in `mvp-stack.md` when it exists.
 ## Example
 
 Support bot on WhatsApp Cloud API. Hypothesis: *"build it with Cloudflare
-Workers, KV and R2, which I already run"*. Riskiest assumption: that a Worker
-can satisfy the provider's webhook contract under load.
+Workers, KV and R2, which I already run"*. Riskiest assumption: the whole
+inbound path fits the provider's webhook window — so the shape is a thin
+end-to-end slice, not a probe.
 
 ```text
-Question:   Can a Worker verify the request signature and answer the webhook
-            inside the provider's timeout at 20 messages/second?
-Pass:       p95 response under the documented timeout, zero rejected
-            signatures, over a 200-message burst.
-Box:        3 hours.        Unblocks: the whole platform choice.
-Fallback:   queue-backed handler that acknowledges first, processes after.
-Verdicts:   works (p95 measured) / affordable (within free tier at MVP,
-            priced at 10x) / maintainable (stack already in production).
+Question:  Does verify -> store -> generate -> reply complete inside the
+           provider's webhook window at 20 messages/second?
+Pass:      p95 under the documented timeout, zero rejected signatures,
+           over a 200-message burst.
+Box:       3 hours.   Unblocks: the platform choice.
+Fallback:  queue-backed handler that acknowledges first, processes after.
 ```
 
 ## Spec-driven development
