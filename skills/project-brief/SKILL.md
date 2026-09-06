@@ -4,7 +4,7 @@ description: >-
   Interviews the user with a short series of questions and turns the answers
   into a projectbrief.md that feeds GitHub Spec Kit. Use when the user asks
   to create, start or fill in a project brief or kickoff document, or wants
-  the product context before /speckit.constitution and /speckit.specify.
+  the product context before /speckit-constitution and /speckit-specify.
 tags: [product, discovery, interview, spec-driven-development]
 allowed-tools: [Read, Write, Edit, Glob, Grep]
 ---
@@ -23,9 +23,9 @@ decides. Never ask about stakeholders, approvals or sign-off.
 ## How to work
 
 1. Read what exists first: `README`, the constitution
-   (`memory/constitution.md` or `.specify/memory/constitution.md`), any
-   `specs/*/spec.md` and any current `projectbrief.md`. Never ask what is
-   already written down — confirm it instead.
+   (`.specify/memory/constitution.md`, or `memory/constitution.md` in older
+   setups), any `specs/*/spec.md` and any current `projectbrief.md`. Never
+   ask what is already written down — confirm it instead.
 2. Ask in rounds, **3 questions per turn maximum**, numbered, each with a
    suggested answer when you have a basis for one.
 3. Close every round with a one-sentence summary and ask for corrections.
@@ -91,9 +91,9 @@ drafting:
 
 ## Output
 
-Write `projectbrief.md` in the project root — or next to the constitution
-when the repo has one, so Spec Kit's project-level context lives together.
-Follow `references/projectbrief-template.md`.
+Write `projectbrief.md` in the project root, following
+`references/projectbrief-template.md`. Not inside `.specify/`: that directory
+belongs to Spec Kit.
 
 ## Spec-driven development
 
@@ -102,9 +102,9 @@ artifacts:
 
 | Brief section | Feeds |
 | --- | --- |
-| Appetite, capacity, run cost | `/speckit.constitution` → the constitution |
-| Summary, Problem, Audience, Success criteria, Out of scope | `/speckit.specify` → `specs/###-feature/spec.md` |
-| `[NEEDS CLARIFICATION]` markers | `/speckit.clarify` |
+| Appetite, capacity, run cost | `/speckit-constitution` → the constitution |
+| Summary, Problem, Audience, Success criteria, Out of scope | `/speckit-specify` → `specs/###-feature/spec.md` |
+| `[NEEDS CLARIFICATION]` markers | `/speckit-clarify` |
 
 - **Do not write what `spec.md` owns**: no user stories, no P1/P2 priorities,
   no functional requirements, no key entities. The brief stops at what and
@@ -113,7 +113,7 @@ artifacts:
   the Spec Kit commands.
 - Mark every unknown with the exact marker syntax
   `[NEEDS CLARIFICATION: what is missing - optionA/optionB?]` so
-  `/speckit.clarify` and `/speckit.analyze` find them.
+  `/speckit-clarify` and `/speckit-analyze` find them.
 
 ## Rules
 

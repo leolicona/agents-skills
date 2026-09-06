@@ -39,7 +39,7 @@ written.
 ## Stage A — interview
 
 Read `projectbrief.md` first for the appetite and the run-cost ceiling, and
-the constitution (`memory/constitution.md` or `.specify/memory/constitution.md`)
+the constitution (`.specify/memory/constitution.md`, or `memory/constitution.md` in older setups)
 for constraints already decided. Then two rounds, three questions each.
 
 *Round 1 — the bet:*
@@ -142,6 +142,6 @@ stayed open.
 ## Spec-driven development
 
 This is Phase 0 research: the verdicts and limits fill the **Technical
-Context** that `/speckit.plan` needs (language, dependencies, storage,
+Context** that `/speckit-plan` needs (language, dependencies, storage,
 platform, constraints, scale). Hand `feasibility.md` over and let the command
 write `plan.md` and `research.md`.

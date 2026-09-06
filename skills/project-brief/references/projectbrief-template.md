@@ -1,8 +1,8 @@
 # Project brief template
 
 Copy this structure. Keep the whole document to one page. Mark every unknown
-with the Spec Kit clarification marker so `/speckit.clarify` and
-`/speckit.analyze` can pick it up:
+with the Spec Kit clarification marker so `/speckit-clarify` and
+`/speckit-analyze` can pick it up:
 
 `[NEEDS CLARIFICATION: what is missing - optionA/optionB?]`
 
@@ -56,10 +56,10 @@ decided when scope had to bend to the appetite.
 - [ ] [NEEDS CLARIFICATION: <question> - <optionA>/<optionB>?]
 
 ## Next steps
-1. `/speckit.constitution` — turn appetite, capacity and run cost into
+1. `/speckit-constitution` — turn appetite, capacity and run cost into
    project principles and constraints.
-2. `/speckit.specify` — feed it Summary, Problem, Audience, Success criteria
+2. `/speckit-specify` — feed it Summary, Problem, Audience, Success criteria
    and Out of scope; it writes `specs/###-feature/spec.md`.
 3. `tech-feasibility` skill — check the idea is buildable with what exists,
-   before `/speckit.plan`.
+   before `/speckit-plan`.
 ```

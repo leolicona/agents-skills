@@ -55,6 +55,6 @@ the residual risk that was accepted rather than measured.
 - [ ] [NEEDS CLARIFICATION: <question> - <optionA>/<optionB>?]
 
 ## Next step
-`/speckit.plan` — hand it the capability decisions, limits and scenario as
+`/speckit-plan` — hand it the capability decisions, limits and scenario as
 Technical Context.
 ```
