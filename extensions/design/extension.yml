@@ -1,0 +1,33 @@
+schema_version: "1.0"
+
+extension:
+  id: design
+  name: "Design Foundations"
+  version: "0.1.0"
+  description: "Define a frontend project's visual foundations once - tokens, style, accessibility bar - as inputs for the constitution and a foundations feature"
+  author: leolicona
+  repository: https://github.com/leolicona/agents-skills
+  license: MIT
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  commands:
+    - name: speckit.design.foundations
+      file: commands/speckit.design.foundations.md
+      description: "Detect existing tokens, interview for visual decisions, and draft the constitution principles plus the design-foundations feature"
+
+hooks:
+  after_constitution:
+    command: speckit.design.foundations
+    optional: true
+    prompt: "Does this project have a UI? Define its visual foundations now, before the first feature?"
+    description: "Offer to define visual foundations right after the constitution"
+
+tags:
+  - "design"
+  - "frontend"
+  - "tokens"
+  - "ui"
+  - "accessibility"
